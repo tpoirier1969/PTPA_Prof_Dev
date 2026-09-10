@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>AI in PBS Station Programming | PTPA Professional Development</title>
-  <meta name="description" content="PTPA Professional Development webinar survey on practical AI use in PBS station programming.">
+  <title>How AI is redefining the TV Programming Workflow</title>
+  <meta name="description" content="PTPA Professional Development webinar survey on how AI is redefining the TV programming workflow.">
   <style>
     :root{--navy:#18334f;--navy2:#10263c;--blue:#2f668f;--cyan:#59b6d4;--ink:#17212b;--muted:#66717d;--line:#d9e0e6;--bg:#f3f6f8;--soft:#f7f9fa;--blueSoft:#eaf2f8;--green:#26745a}
     *{box-sizing:border-box}
@@ -15,7 +15,8 @@
     header{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy2),var(--navy) 58%,#285f82);color:#fff;padding:46px 0 52px}
     header:after{content:"AI";position:absolute;right:max(4vw,34px);top:-44px;font-size:210px;font-weight:900;letter-spacing:-.08em;color:#fff;opacity:.035;line-height:1}
     .eyebrow{font-size:12px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:#bcd7e6}
-    h1{margin:8px 0 12px;font-size:clamp(34px,5.5vw,58px);line-height:1.02;max-width:780px;letter-spacing:-.025em}
+    .eventMeta{margin-top:10px;font-size:17px;font-weight:850;color:#fff;letter-spacing:.01em}
+    h1{margin:8px 0 12px;font-size:clamp(34px,5.5vw,58px);line-height:1.02;max-width:900px;letter-spacing:-.025em}
     header p{margin:0;max-width:770px;color:#dce8ef;line-height:1.55;font-size:17px}
     .heroTags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
     .heroTag{padding:7px 10px;border:1px solid #ffffff2c;border-radius:999px;background:#ffffff10;color:#e7f2f7;font-size:12px;font-weight:800}
@@ -73,7 +74,8 @@
 <header>
   <div class="wrap">
     <div class="eyebrow">PTPA Professional Development Webinar</div>
-    <h1>AI in PBS Station Programming</h1>
+    <h1>How AI is redefining the TV Programming Workflow</h1>
+    <div class="eventMeta">September 22 · 2:00 PM ET</div>
     <p>Help shape a practical webinar for public television programmers. Tell us how you are using AI now, what you have tried, and which questions would be most useful to tackle together.</p>
     <div class="heroTags" aria-label="Webinar topics">
       <span class="heroTag">Programming workflows</span>
@@ -113,8 +115,8 @@
     <form id="form">
       <div class="grid2">
         <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" required placeholder="Your name">
+          <label for="name">Name <span class="hint">Optional</span></label>
+          <input id="name" name="name" placeholder="Your name">
         </div>
         <div class="field">
           <label for="station">Station / organization</label>
@@ -189,14 +191,14 @@ function render(){
   const q=$('#search').value.toLowerCase().trim(),f=$('#filter').value;
   const filtered=rows.filter(r=>(!f||r.skill===f)&&(!q||[r.name,r.station,r.skill,r.questions,r.projects].join(' ').toLowerCase().includes(q)));
   $('#count').textContent=`(${rows.length})`;
-  $('#responseList').innerHTML=filtered.length?filtered.map(r=>`<article class="card"><div class="top"><div><div class="name">${esc(r.name)}</div><div class="station">${esc(r.station)}</div></div><div class="badge">${esc(r.skill)}</div></div><div class="answers"><div class="answer"><strong>Webinar questions</strong><p>${esc(r.questions||'No questions entered.')}</p></div><div class="answer"><strong>AI projects & experiments</strong><p>${esc(r.projects||'No projects entered.')}</p></div></div></article>`).join(''):'<div class="empty">No responses match those filters.</div>';
+  $('#responseList').innerHTML=filtered.length?filtered.map(r=>`<article class="card"><div class="top"><div><div class="name">${esc(r.name||'Anonymous')}</div><div class="station">${esc(r.station)}</div></div><div class="badge">${esc(r.skill)}</div></div><div class="answers"><div class="answer"><strong>Webinar questions</strong><p>${esc(r.questions||'No questions entered.')}</p></div><div class="answer"><strong>AI projects & experiments</strong><p>${esc(r.projects||'No projects entered.')}</p></div></div></article>`).join(''):'<div class="empty">No responses match those filters.</div>';
 }
 $('#search').oninput=render;
 $('#filter').onchange=render;
 $('#form').onsubmit=e=>{
   e.preventDefault();
   const fd=new FormData(e.currentTarget);
-  rows.unshift({name:fd.get('name'),station:fd.get('station'),skill:fd.get('skill'),questions:fd.get('questions'),projects:fd.get('projects')});
+  rows.unshift({name:(fd.get('name')||'').trim()||'Anonymous',station:fd.get('station'),skill:fd.get('skill'),questions:fd.get('questions'),projects:fd.get('projects')});
   render();
   e.currentTarget.reset();
   $('#success').style.display='inline';
