@@ -3,41 +3,127 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>PTPA Professional Development Survey</title>
+  <title>AI in PBS Station Programming | PTPA Professional Development</title>
+  <meta name="description" content="PTPA Professional Development webinar survey on practical AI use in PBS station programming.">
   <style>
-    :root{--navy:#18334f;--blue:#2f668f;--ink:#17212b;--muted:#66717d;--line:#d9e0e6;--bg:#f4f6f8;--soft:#f7f9fa;--blueSoft:#eaf2f8;--amber:#fff6dd}
-    *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
-    header{background:var(--navy);color:#fff;padding:24px}.wrap{width:min(1080px,calc(100% - 32px));margin:auto}header .eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.72}h1{margin:6px 0 8px;font-size:clamp(26px,4vw,38px)}header p{margin:0;max-width:760px;color:#dbe4eb;line-height:1.45}
-    main{padding:28px 0 48px}.notice{background:var(--amber);border:1px solid #eddca5;border-radius:12px;padding:12px 14px;margin-bottom:18px;color:#5f460c}.tabs{display:inline-flex;gap:4px;background:#e7ebef;padding:4px;border-radius:12px;margin-bottom:18px}.tab{border:0;background:transparent;padding:10px 16px;border-radius:9px;font-weight:800;color:#4e5965;cursor:pointer}.tab.active{background:#fff;color:var(--navy);box-shadow:0 2px 8px #18334f17}
-    .panel{display:none;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px #18334f12}.panel.active{display:block}.panelHead{padding:24px 26px 18px;border-bottom:1px solid var(--line)}.panelHead h2{margin:0 0 6px}.panelHead p{margin:0;color:var(--muted)}form{padding:24px 26px 28px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{margin-bottom:18px}label{display:block;font-weight:800;margin-bottom:7px}.hint{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:3px}input,select,textarea{width:100%;padding:11px 12px;border:1px solid #bec9d3;border-radius:10px;font:inherit;background:#fff}textarea{min-height:112px;resize:vertical}.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.skills label{margin:0}.skills input{display:none}.skills span{display:block;text-align:center;padding:11px 8px;border:1px solid #c6d0d9;border-radius:10px;font-size:14px}.skills input:checked+span{border-color:var(--blue);background:var(--blueSoft);color:var(--navy);box-shadow:inset 0 0 0 1px var(--blue)}.primary{border:0;border-radius:10px;padding:11px 18px;background:var(--navy);color:#fff;font-weight:800;cursor:pointer}.success{display:none;margin-left:10px;color:#26745a;font-weight:700}
-    .tools{display:flex;gap:12px;padding:18px 22px;border-bottom:1px solid var(--line);background:#fafbfc;flex-wrap:wrap}.tools input{max-width:360px}.tools select{width:auto;min-width:180px}.responses{padding:20px 22px 26px;display:grid;gap:14px}.card{border:1px solid var(--line);border-radius:14px;padding:18px}.top{display:flex;justify-content:space-between;gap:12px}.name{font-size:18px;font-weight:900;color:var(--navy)}.station{font-size:14px;color:var(--muted);margin-top:2px}.badge{background:var(--blueSoft);color:var(--navy);border-radius:999px;padding:6px 9px;font-size:12px;font-weight:900;align-self:flex-start}.answers{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}.answer{background:var(--soft);padding:12px 13px;border-radius:10px}.answer strong{display:block;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#596774;margin-bottom:5px}.answer p{margin:0;font-size:14px;line-height:1.45}.sample{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#917014;margin-left:6px}.empty{text-align:center;color:var(--muted);padding:30px}.footer{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
-    @media(max-width:720px){.grid2,.answers{grid-template-columns:1fr}.skills{grid-template-columns:1fr 1fr}.panelHead,form{padding-left:18px;padding-right:18px}}
+    :root{--navy:#18334f;--navy2:#10263c;--blue:#2f668f;--cyan:#59b6d4;--ink:#17212b;--muted:#66717d;--line:#d9e0e6;--bg:#f3f6f8;--soft:#f7f9fa;--blueSoft:#eaf2f8;--green:#26745a}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:linear-gradient(180deg,#eef4f8 0,#f6f7f8 420px,#f6f7f8 100%)}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .wrap{width:min(1080px,calc(100% - 32px));margin:auto}
+    header{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy2),var(--navy) 58%,#285f82);color:#fff;padding:46px 0 52px}
+    header:after{content:"AI";position:absolute;right:max(4vw,34px);top:-44px;font-size:210px;font-weight:900;letter-spacing:-.08em;color:#fff;opacity:.035;line-height:1}
+    .eyebrow{font-size:12px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:#bcd7e6}
+    h1{margin:8px 0 12px;font-size:clamp(34px,5.5vw,58px);line-height:1.02;max-width:780px;letter-spacing:-.025em}
+    header p{margin:0;max-width:770px;color:#dce8ef;line-height:1.55;font-size:17px}
+    .heroTags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+    .heroTag{padding:7px 10px;border:1px solid #ffffff2c;border-radius:999px;background:#ffffff10;color:#e7f2f7;font-size:12px;font-weight:800}
+    main{padding:28px 0 52px}
+    .intro{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin-bottom:22px}
+    .introCard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 22px;box-shadow:0 8px 24px #18334f0d}
+    .introCard h2{margin:0 0 7px;font-size:20px;color:var(--navy)}
+    .introCard p{margin:0;color:var(--muted);line-height:1.55}
+    .focusList{display:grid;gap:8px;margin-top:2px}
+    .focusItem{display:flex;gap:9px;align-items:flex-start;color:#334454;font-size:14px;line-height:1.4}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);margin-top:6px;flex:0 0 auto}
+    .tabs{display:inline-flex;gap:4px;background:#e2e8ed;padding:4px;border-radius:12px;margin-bottom:18px}
+    .tab{border:0;background:transparent;padding:10px 16px;border-radius:9px;font-weight:850;color:#4e5965}
+    .tab.active{background:#fff;color:var(--navy);box-shadow:0 2px 8px #18334f17}
+    .panel{display:none;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px #18334f12}
+    .panel.active{display:block}
+    .panelHead{padding:24px 26px 18px;border-bottom:1px solid var(--line)}
+    .panelHead h2{margin:0 0 6px;font-size:24px}
+    .panelHead p{margin:0;color:var(--muted);line-height:1.5}
+    form{padding:24px 26px 28px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .field{margin-bottom:20px}
+    label{display:block;font-weight:850;margin-bottom:7px}
+    .hint{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-top:3px;line-height:1.4}
+    input,select,textarea{width:100%;padding:12px 13px;border:1px solid #bec9d3;border-radius:10px;background:#fff;color:var(--ink);outline:none}
+    input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2f668f1e}
+    textarea{min-height:120px;resize:vertical;line-height:1.45}
+    .skills{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+    .skills label{margin:0}
+    .skills input{display:none}
+    .skills span{display:block;text-align:center;padding:12px 8px;border:1px solid #c6d0d9;border-radius:10px;font-size:14px;background:#fff}
+    .skills input:checked+span{border-color:var(--blue);background:var(--blueSoft);color:var(--navy);box-shadow:inset 0 0 0 1px var(--blue)}
+    .submitRow{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .primary{border:0;border-radius:10px;padding:12px 19px;background:var(--navy);color:#fff;font-weight:850}
+    .primary:hover{background:#214767}
+    .success{display:none;color:var(--green);font-weight:750;font-size:14px}
+    .tools{display:flex;gap:12px;padding:18px 22px;border-bottom:1px solid var(--line);background:#fafbfc;flex-wrap:wrap}
+    .tools input{max-width:390px}.tools select{width:auto;min-width:190px}
+    .responses{padding:20px 22px 26px;display:grid;gap:14px}
+    .card{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff}
+    .top{display:flex;justify-content:space-between;gap:12px}
+    .name{font-size:18px;font-weight:900;color:var(--navy)}
+    .station{font-size:14px;color:var(--muted);margin-top:2px}
+    .badge{background:var(--blueSoft);color:var(--navy);border-radius:999px;padding:6px 9px;font-size:12px;font-weight:900;align-self:flex-start;white-space:nowrap}
+    .answers{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+    .answer{background:var(--soft);padding:12px 13px;border-radius:10px}
+    .answer strong{display:block;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#596774;margin-bottom:5px}
+    .answer p{margin:0;font-size:14px;line-height:1.5}
+    .empty{text-align:center;color:var(--muted);padding:30px}
+    footer{padding:24px 0 2px;text-align:center;color:#71808d;font-size:12px}
+    @media(max-width:760px){.intro,.grid2,.answers{grid-template-columns:1fr}.skills{grid-template-columns:1fr 1fr}header{padding:34px 0 40px}.panelHead,form{padding-left:18px;padding-right:18px}.introCard{padding:17px 18px}.top{align-items:flex-start}}
   </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <div class="eyebrow">Public Television Programmers Association</div>
-    <h1>Professional Development Skills &amp; Projects Survey</h1>
-    <p>A quick snapshot of what committee members know, what they have built, and what they would like help learning from one another.</p>
+    <div class="eyebrow">PTPA Professional Development Webinar</div>
+    <h1>AI in PBS Station Programming</h1>
+    <p>Help shape a practical webinar for public television programmers. Tell us how you are using AI now, what you have tried, and which questions would be most useful to tackle together.</p>
+    <div class="heroTags" aria-label="Webinar topics">
+      <span class="heroTag">Programming workflows</span>
+      <span class="heroTag">Research &amp; analysis</span>
+      <span class="heroTag">Metadata &amp; copy</span>
+      <span class="heroTag">Automation</span>
+      <span class="heroTag">Policies &amp; guardrails</span>
+    </div>
   </div>
 </header>
+
 <main class="wrap">
-  <div class="notice"><strong>Mockup mode:</strong> The group responses are fictional sample data for discussion. Nothing is being saved to Supabase yet.</div>
-  <div class="tabs">
-    <button class="tab active" data-target="survey">Submit Response</button>
+  <section class="intro">
+    <div class="introCard">
+      <h2>Help us build the session around real station needs</h2>
+      <p>This is not intended to be a generic “what is AI?” presentation. We want to focus on practical uses, useful experiments, recurring pain points, and questions that matter specifically to people making programming decisions at PBS stations.</p>
+    </div>
+    <div class="introCard">
+      <div class="focusList">
+        <div class="focusItem"><span class="dot"></span><span>What programmers are already doing with AI</span></div>
+        <div class="focusItem"><span class="dot"></span><span>Where AI can save time without creating new headaches</span></div>
+        <div class="focusItem"><span class="dot"></span><span>What stations should be cautious about</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tabs" role="tablist" aria-label="Survey views">
+    <button class="tab active" data-target="survey">Share Your Experience</button>
     <button class="tab" data-target="responses">Group Responses <span id="count">(6)</span></button>
   </div>
 
   <section class="panel active" id="survey">
-    <div class="panelHead"><h2>Tell us where you're at</h2><p>This should take only a couple of minutes. Short answers are fine.</p></div>
+    <div class="panelHead">
+      <h2>AI use in station programming</h2>
+      <p>A few short answers will give the Professional Development Committee a much better target for the webinar.</p>
+    </div>
     <form id="form">
       <div class="grid2">
-        <div class="field"><label for="name">Name</label><input id="name" name="name" required placeholder="Your name"></div>
-        <div class="field"><label for="station">Station / organization</label><input id="station" name="station" required placeholder="Example: WXYZ Public Media"></div>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" required placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="station">Station / organization</label>
+          <input id="station" name="station" required placeholder="Example: WXYZ Public Media">
+        </div>
       </div>
+
       <div class="field">
-        <label>Skill level <span class="hint">How would you describe your current level with the tools or topics this committee is discussing?</span></label>
+        <label>AI skill level <span class="hint">How comfortable are you currently using AI tools in your work?</span></label>
         <div class="skills">
           <label><input type="radio" name="skill" value="Beginner" required><span>Beginner</span></label>
           <label><input type="radio" name="skill" value="Comfortable"><span>Comfortable</span></label>
@@ -45,36 +131,77 @@
           <label><input type="radio" name="skill" value="Expert"><span>Expert</span></label>
         </div>
       </div>
-      <div class="field"><label for="questions">Questions <span class="hint">What would you like help with, learn more about, or hear others discuss?</span></label><textarea id="questions" name="questions" placeholder="What are you curious about? What keeps slowing you down?"></textarea></div>
-      <div class="field"><label for="projects">Projects you've done <span class="hint">Share anything relevant you've tried, built, tested, or rolled out.</span></label><textarea id="projects" name="projects" placeholder="A few bullets or a short paragraph is enough."></textarea></div>
-      <button class="primary" type="submit">Submit response</button><span class="success" id="success">Mock response added.</span>
+
+      <div class="field">
+        <label for="questions">What questions should the webinar answer? <span class="hint">Think about programming, scheduling, acquisitions, pledge, research, metadata, analysis, workflows, policy, or anything else you deal with at your station.</span></label>
+        <textarea id="questions" name="questions" placeholder="What would you most like to understand, see demonstrated, or discuss with other programmers?"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="projects">What have you already tried with AI? <span class="hint">Share projects, experiments, workflows, prompts, tools, or automations. Successful, half-successful, and spectacularly unsuccessful all count.</span></label>
+        <textarea id="projects" name="projects" placeholder="Tell us what you have used AI for in station programming or related work."></textarea>
+      </div>
+
+      <div class="submitRow">
+        <button class="primary" type="submit">Submit response</button>
+        <span class="success" id="success">Thanks. Your response has been added.</span>
+      </div>
     </form>
   </section>
 
   <section class="panel" id="responses">
-    <div class="panelHead"><h2>Group Responses</h2><p>Use this view to spot shared questions, possible mentors, and professional-development session ideas.</p></div>
-    <div class="tools"><input id="search" type="search" placeholder="Search names, stations, questions, projects…"><select id="filter"><option value="">All skill levels</option><option>Beginner</option><option>Comfortable</option><option>Advanced</option><option>Expert</option></select></div>
+    <div class="panelHead">
+      <h2>What programmers are exploring</h2>
+      <p>Browse the group's questions and projects to see where interests overlap and where members may already have useful experience to share.</p>
+    </div>
+    <div class="tools">
+      <input id="search" type="search" placeholder="Search names, stations, questions, projects…">
+      <select id="filter">
+        <option value="">All AI skill levels</option>
+        <option>Beginner</option>
+        <option>Comfortable</option>
+        <option>Advanced</option>
+        <option>Expert</option>
+      </select>
+    </div>
     <div class="responses" id="responseList"></div>
   </section>
-  <div class="footer">PTPA Professional Development Committee · Concept mockup</div>
+
+  <footer>Public Television Programmers Association · Professional Development Committee</footer>
 </main>
+
 <script>
 const sampleResponses=[
-{name:"Jordan Lee",station:"Great Lakes Public Media",skill:"Advanced",questions:"How are stations creating useful AI guidelines without making the rules obsolete six months later?",projects:"Built a lightweight program-description cleanup workflow and tested AI-assisted schedule copy.",sample:true},
-{name:"Maya Thompson",station:"Prairie Public Television",skill:"Comfortable",questions:"I'd like practical examples of automating repetitive programming tasks without needing a full IT project.",projects:"Created shared acquisition trackers and rebuilt several internal planning spreadsheets.",sample:true},
-{name:"Chris Alvarez",station:"Coastal Public Media",skill:"Beginner",questions:"Where should someone start with AI tools, and what information should never be pasted into them?",projects:"Mostly manual workflows so far. I've experimented with ChatGPT for email drafts and meeting summaries.",sample:true},
-{name:"Robin Patel",station:"Mountain State PBS",skill:"Expert",questions:"How can we share small tools between stations without creating a maintenance nightmare?",projects:"Built internal web utilities for metadata QA, schedule comparisons, and pledge tracking.",sample:true},
-{name:"Sam Carter",station:"River Valley Public TV",skill:"Comfortable",questions:"Can we build a common library of prompts or templates that are actually useful for programmers?",projects:"Used AI to summarize distributor materials and created a standardized series-evaluation worksheet.",sample:true},
-{name:"Alex Morgan",station:"Metro Public Broadcasting",skill:"Advanced",questions:"I'm interested in ways to visualize schedule performance and turn analytics into programming decisions.",projects:"Developed Power BI dashboards for audience trends and experimented with Python for schedule analysis.",sample:true}
+  {name:"Jordan Lee",station:"Great Lakes Public Media",skill:"Advanced",questions:"How are stations setting practical AI guidelines for programmers without making the rules obsolete every time the tools change?",projects:"Built an AI-assisted workflow for cleaning up program descriptions, shortening copy to character limits, and flagging inconsistent metadata."},
+  {name:"Maya Thompson",station:"Prairie Public Television",skill:"Comfortable",questions:"I would like to see examples of automating repetitive schedule and acquisition work without needing a large IT project.",projects:"Used AI to compare distributor grids, summarize acquisition notes, and turn long program materials into a shorter internal programming brief."},
+  {name:"Chris Alvarez",station:"Coastal Public Media",skill:"Beginner",questions:"What station information is safe to use with public AI tools, and what should never be uploaded or pasted into them?",projects:"Mostly basic experimentation so far: drafting viewer-facing copy, summarizing meeting notes, and brainstorming alternate program descriptions."},
+  {name:"Robin Patel",station:"Mountain State PBS",skill:"Expert",questions:"Can stations share AI-assisted programming tools or workflows with each other in a way that is maintainable and doesn't depend on one person forever?",projects:"Built small internal tools for metadata QA, schedule comparison, duplicate detection, and querying programming documents with natural-language prompts."},
+  {name:"Sam Carter",station:"River Valley Public TV",skill:"Comfortable",questions:"Could we develop a shared library of prompts specifically for public television programmers, with examples of when each one is actually useful?",projects:"Used AI to summarize distributor materials, generate first-pass series evaluations, compare similar titles, and organize pledge-program notes."},
+  {name:"Alex Morgan",station:"Metro Public Broadcasting",skill:"Advanced",questions:"How can AI help us interpret audience and schedule data without inventing conclusions or turning every analysis into a black box?",projects:"Combined audience dashboards with AI-assisted analysis to look for scheduling patterns, compare dayparts, and generate questions for deeper manual review."}
 ];
+
 let rows=[...sampleResponses];
 const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-function esc(v=""){return v.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));}
+function esc(v=""){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));}
 function show(id){$$('.tab').forEach(b=>b.classList.toggle('active',b.dataset.target===id));$$('.panel').forEach(p=>p.classList.toggle('active',p.id===id));}
 $$('.tab').forEach(b=>b.onclick=()=>show(b.dataset.target));
-function render(){const q=$('#search').value.toLowerCase().trim(),f=$('#filter').value;const filtered=rows.filter(r=>(!f||r.skill===f)&&(!q||[r.name,r.station,r.skill,r.questions,r.projects].join(' ').toLowerCase().includes(q)));$('#count').textContent=`(${rows.length})`;$('#responseList').innerHTML=filtered.length?filtered.map(r=>`<article class="card"><div class="top"><div><div class="name">${esc(r.name)}${r.sample?'<span class="sample">sample</span>':''}</div><div class="station">${esc(r.station)}</div></div><div class="badge">${esc(r.skill)}</div></div><div class="answers"><div class="answer"><strong>Questions</strong><p>${esc(r.questions||'No questions entered.')}</p></div><div class="answer"><strong>Projects you've done</strong><p>${esc(r.projects||'No projects entered.')}</p></div></div></article>`).join(''):'<div class="empty">No responses match those filters.</div>';}
-$('#search').oninput=render;$('#filter').onchange=render;
-$('#form').onsubmit=e=>{e.preventDefault();const fd=new FormData(e.currentTarget);rows.unshift({name:fd.get('name'),station:fd.get('station'),skill:fd.get('skill'),questions:fd.get('questions'),projects:fd.get('projects'),sample:false});render();e.currentTarget.reset();$('#success').style.display='inline';setTimeout(()=>show('responses'),500);};
+function render(){
+  const q=$('#search').value.toLowerCase().trim(),f=$('#filter').value;
+  const filtered=rows.filter(r=>(!f||r.skill===f)&&(!q||[r.name,r.station,r.skill,r.questions,r.projects].join(' ').toLowerCase().includes(q)));
+  $('#count').textContent=`(${rows.length})`;
+  $('#responseList').innerHTML=filtered.length?filtered.map(r=>`<article class="card"><div class="top"><div><div class="name">${esc(r.name)}</div><div class="station">${esc(r.station)}</div></div><div class="badge">${esc(r.skill)}</div></div><div class="answers"><div class="answer"><strong>Webinar questions</strong><p>${esc(r.questions||'No questions entered.')}</p></div><div class="answer"><strong>AI projects & experiments</strong><p>${esc(r.projects||'No projects entered.')}</p></div></div></article>`).join(''):'<div class="empty">No responses match those filters.</div>';
+}
+$('#search').oninput=render;
+$('#filter').onchange=render;
+$('#form').onsubmit=e=>{
+  e.preventDefault();
+  const fd=new FormData(e.currentTarget);
+  rows.unshift({name:fd.get('name'),station:fd.get('station'),skill:fd.get('skill'),questions:fd.get('questions'),projects:fd.get('projects')});
+  render();
+  e.currentTarget.reset();
+  $('#success').style.display='inline';
+  setTimeout(()=>show('responses'),500);
+};
 render();
 if(new URLSearchParams(location.search).get('view')==='responses')show('responses');
 </script>
