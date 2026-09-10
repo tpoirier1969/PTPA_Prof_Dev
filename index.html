@@ -64,7 +64,7 @@
     <div class="exampleNote" id="exampleNote">Example responses are shown until live submissions begin.</div>
     <div class="responses" id="responseList"><div class="empty">Loading responses…</div></div>
   </section>
-  <footer>Public Television Programmmers Association · Professional Development Committee</footer>
+  <footer>Public Television Programmers Association · Professional Development Committee</footer>
 </main>
 <script>
 const SUPABASE_URL='https://tdepltlnughyfrjqufdg.supabase.co';
@@ -94,7 +94,8 @@ function setMessage(text,type=''){const el=$('#formMessage');el.textContent=text
 $('#search').oninput=render;$('#filter').onchange=render;
 $('#form').onsubmit=async e=>{e.preventDefault();if(!currentEvent){setMessage('The webinar connection is not ready. Please refresh and try again.','error');return;}const fd=new FormData(e.currentTarget);const payload={event_id:currentEvent.id,name:(fd.get('name')||'').trim()||null,station_organization:(fd.get('station')||'').trim(),skill_level:fd.get('skill'),webinar_questions:(fd.get('questions')||'').trim()||null,ai_projects:(fd.get('projects')||'').trim()||null};$('#submitBtn').disabled=true;setMessage('Submitting…');let saved=null;try{const res=await fetch(`${SUPABASE_URL}/rest/v1/ptpa_ai_responses`,{method:'POST',headers:apiHeaders({'Content-Type':'application/json','Prefer':'return=representation'}),body:JSON.stringify(payload)});if(!res.ok){const detail=await res.text();throw new Error(detail||'Submission failed.');}const data=await res.json();saved=data[0]||null;}catch(err){console.error(err);setMessage('We could not save your response. Please try again.','error');if(currentEvent?.accepting_responses)$('#submitBtn').disabled=false;return;}
   e.currentTarget.reset();setMessage('Thanks. Your response has been submitted.','success');
-  try{await loadResponses();}catch(err){console.error('Response saved, but response list refresh failed:',err);if(saved){usingExamples=false;rows=[mapResponse(saved),...(usingExamples?[]:rows)];render();}}
+  const hadExamples=usingExamples;
+  try{await loadResponses();}catch(err){console.error('Response saved, but response list refresh failed:',err);if(saved){usingExamples=false;rows=[mapResponse(saved),...(hadExamples?[]:rows)];render();}}
   setTimeout(()=>show('responses'),350);if(currentEvent?.accepting_responses)$('#submitBtn').disabled=false;
 };
 (async function init(){try{await loadEvent();await loadResponses();}catch(err){console.error(err);rows=[...sampleResponses];usingExamples=true;render();$('#submitBtn').disabled=true;setMessage('The response service is temporarily unavailable. Please refresh and try again.','error');}if(new URLSearchParams(location.search).get('view')==='responses'&&currentEvent?.responses_public!==false)show('responses');})();
