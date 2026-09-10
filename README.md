@@ -1,38 +1,79 @@
-# PTPA Professional Development Skills & Projects Survey
+# PTPA AI Professional Development Survey
 
-A small static web app for the **Public Television Programmers Association Professional Development Committee**.
+Web survey for the **Public Television Programmers Association Professional Development Committee** and its AI-focused webinars and professional-development sessions.
 
-## What it does
+## Current event
 
-- Collects a member's name and station/organization
-- Asks for current skill level
-- Collects questions/topics they want help with
-- Collects projects they have already done
-- Provides a group-response view with search and skill-level filtering
-- Includes fictional sample data so the concept can be demonstrated immediately
+**How AI is redefining the TV Programming Workflow**  
+September 22, 2026 · 2:00 PM ET
 
-## Mockup mode
+Default event key:
 
-Open `index.html` directly or publish the repository with GitHub Pages.
+`2026-09-22-ai-programming-workflow`
 
-The current version is intentionally self-contained and runs without Supabase. Form submissions are added only to the current browser session. Refreshing the page restores the original fictional sample data.
+## Architecture
 
-## Supabase setup
+The site is a static GitHub Pages application connected directly to the WNMUProgramming Supabase project with a browser-safe Supabase publishable key.
 
-Run `supabase.sql` in the Supabase SQL Editor.
+All database objects for this application are deliberately PTPA-AI specific:
 
-The table is `public.ptpa_pd_responses`.
+- `public.ptpa_ai_events`
+- `public.ptpa_ai_responses`
+- `ptpa_ai_*` indexes and RLS policies
 
-Security model in the supplied SQL:
+No generic survey or response table names are used.
 
-- Anonymous/public visitors may insert responses.
-- Only authenticated Supabase users may select/read the full response list.
+## Multiple PTPA-AI events
 
-## Next production step
+The database is designed for more than one AI event. Each session has its own row in `ptpa_ai_events`, including:
 
-Wire the page to Supabase, add committee/admin authentication for the full response view, and then remove mock mode/sample data.
+- event key
+- event title
+- start date/time
+- timezone
+- whether responses are still accepted
+- whether group responses are publicly visible
+
+Responses reference the event by `event_id`, keeping each session's answers separate.
+
+The page uses the September 22 event by default. Another event can be selected with:
+
+`?event=EVENT-KEY`
+
+Example:
+
+`index.html?event=2026-09-22-ai-programming-workflow`
+
+## Response data
+
+`ptpa_ai_responses` stores:
+
+- optional name
+- station / organization
+- AI skill level
+- webinar questions
+- AI projects / experiments
+- event ID
+- submission timestamp
+
+## Security
+
+Row Level Security is enabled on both PTPA-AI tables.
+
+For the current event:
+
+- visitors may read event information
+- visitors may submit a response only while the event is accepting responses
+- visitors may read responses only when that event has `responses_public = true`
+- visitors cannot update or delete responses
+
+The frontend contains only the browser-safe Supabase publishable key. It does not contain a secret or service-role key.
+
+## Empty-event examples
+
+Until an event receives its first live response, the page displays six example responses so the Group Responses view is not empty. The page identifies them as examples. As soon as a live response exists for the event, only live Supabase responses are shown.
 
 ## Files
 
-- `index.html` — complete shareable mockup
-- `supabase.sql` — database table, RLS policies, indexes, and optional sample inserts
+- `index.html` — live webinar survey and response viewer
+- `supabase.sql` — PTPA-AI database schema, RLS policies, grants, indexes, and current event record
